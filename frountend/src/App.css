@@ -1,0 +1,43 @@
+header{
+  background-color: #D0F1BF;
+}
+   
+        .hover-shadow {
+          transition: all 0.3s ease;
+        }
+        .hover-shadow:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+        }
+     .loader-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1050;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+.pointor{
+  cursor: pointer;
+}
