@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 import { login } from "./store/authslice";
+import api from "./api";
 const Login = () => {
   const dispatch = useDispatch()
   const showCustomUserToast = (userName) => {
@@ -111,7 +112,7 @@ const [form, setform] = useState({
 const handlesubmit = async(e)=>{
      e.preventDefault();
 
-     axios.post(`http://localhost:3000/api/login`,form).then((res)=>{
+         const res = await api.post("/api/login", form);
         if(res.data.status===1){
            localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
@@ -123,7 +124,7 @@ const handlesubmit = async(e)=>{
        }else{
           toast.error(res.data.message);
         }
-})
+
 }
   
 return (

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import api from "./api";
 
 
 const Signup = () => {
@@ -30,7 +31,7 @@ const onChange=(e)=>{
 const handleSubmit=async(e)=>{
   e.preventDefault();
   
-  axios.post(`http://localhost:3000/api/signup`,form).then((res)=>{
+      const res = await api.post("/api/signup", form);
     if(res.data.status===1){
       swan()
      
@@ -38,7 +39,7 @@ const handleSubmit=async(e)=>{
     }else{
       alert(res.data.message);
     }
-})
+
 }
 
   

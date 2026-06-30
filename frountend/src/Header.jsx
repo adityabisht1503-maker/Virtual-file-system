@@ -115,8 +115,8 @@ export default function Header() {
           <div className="text-end">
             {isLoggedin?(<>
             <div className="d-flex justify-content-center align-items-center gap-2">
-<img src="logo.jpeg" alt="mdo" width="32" height="32" class="rounded-circle"/>
-            <span className="text-black
+<img src="logo1.jpeg" alt="mdo" width="32" height="32" class="rounded-circle"/>
+            <span className="text-black fw-bolder
       ">{user?.name}</span>
 
             <button onClick={handlelogout} type="button" className="btn btn-danger ">Logout</button>

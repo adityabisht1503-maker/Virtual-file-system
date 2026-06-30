@@ -4,6 +4,8 @@ import axios from 'axios';
 import Loader from './Loader';
 import Files from './Files.jsx';
 import { toast } from 'react-toastify';
+import api from './api.js';
+
 export default function Mainapp() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -38,37 +40,34 @@ export default function Mainapp() {
     setSelectedFile(null);
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      alert('Please select a file first');
-      return;
-    }
- setload(true)
-    // Your backend upload logic will go here
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-        const token = localStorage.getItem('token');
+const handleUpload = async () => {
+  if (!selectedFile) {
+    alert("Please select a file first");
+    return;
+  }
 
-    axios.post(`http://localhost:3000/api/uploudfile`,formData,{
-       headers: {
-      'Authorization': `Bearer ${token}`
-    }
-    }
-       ).then((res) => {
-        toast.success("uploaded successfully")
-      setload(false);  // ✅ Hide loader AFTER success
-    })
-    .catch((error) => {
-      console.error("Upload failed:", error);
-      setload(false);  // ✅ Hide loader even if error
+  setload(true);
+
+  const formData = new FormData();
+  formData.append("file", selectedFile);
+
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await api.post("/api/uploudfile", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
-     
-    
- 
-   
-    // Example: await axios.post('/api/upload', formData);
-  };
-  
+
+    toast.success("Uploaded successfully");
+  } catch (error) {
+    console.error("Upload failed:", error);
+    toast.error("Upload failed");
+  } finally {
+    setload(false);
+  }
+};
   
 
   const formatFileSize = (bytes) => {
